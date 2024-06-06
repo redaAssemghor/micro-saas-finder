@@ -1,12 +1,13 @@
+"use client";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export default function Home() {
   const [niche, setNiche] = useState("");
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setResponse("");
@@ -21,15 +22,19 @@ export default function Home() {
         }
       );
       setResponse(res.data.response);
-    } catch (error) {
-      if (error.response && error.response.status === 429) {
-        setError(
-          "You have exceeded your quota. Please check your plan and billing details."
-        );
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (err.response && err.response.status === 429) {
+          setError(
+            "You have exceeded your quota. Please check your plan and billing details."
+          );
+        } else {
+          setError("Error: Unable to fetch ideas from GPT-3 API");
+        }
       } else {
-        setError("Error: Unable to fetch ideas from GPT-3 API");
+        setError("An unexpected error occurred");
       }
-      console.error("API Error:", error);
+      console.error("API Error:", err);
     }
   };
 
