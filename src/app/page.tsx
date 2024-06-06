@@ -23,7 +23,13 @@ export default function Home() {
       );
       setResponse(res.data.response);
     } catch (error) {
-      setError("Error: Unable to fetch ideas from GPT-3 API");
+      if (error.response && error.response.status === 429) {
+        setError(
+          "You have exceeded your quota. Please check your plan and billing details."
+        );
+      } else {
+        setError("Error: Unable to fetch ideas from GPT-3 API");
+      }
       console.error("API Error:", error);
     }
   };

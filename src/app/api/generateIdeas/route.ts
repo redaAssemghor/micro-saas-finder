@@ -30,15 +30,24 @@ export async function POST(req: NextRequest) {
     console.log("Completion:", completion);
 
     return NextResponse.json({ response: completion.choices[0].text });
-  } catch (error) {
-    console.error("Error:", error);
+  } catch (err) {
+    console.error("Error:", err);
+
+    let statusCode = 500;
+    let errorMessage = "Failed to fetch response from GPT-3 API";
+
+    if (err instanceof Error && err.message.includes("429")) {
+      statusCode = 429;
+      errorMessage =
+        "You have exceeded your quota. Please check your plan and billing details.";
+    }
 
     return NextResponse.json(
       {
-        error: "Failed to fetch response from GPT-3 API",
-        details: error.message,
+        error: errorMessage,
+        details: err instanceof Error ? err.message : "Unknown error",
       },
-      { status: 500 }
+      { status: statusCode }
     );
   }
 }
