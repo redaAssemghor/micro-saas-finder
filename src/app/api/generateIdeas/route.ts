@@ -7,24 +7,31 @@ const openai = new OpenAI({
 
 export async function POST(req: NextRequest) {
   try {
-    console.log("Received request:", req); // Log the request object for debugging
+    console.log("Received request:", req);
 
-    const { niche } = await req.json();
+    const body = await req.json();
+    console.log("Request body:", body);
 
-    console.log("Niche:", niche); // Log the niche parameter for debugging
+    const { niche } = body;
+    if (!niche) {
+      console.error("Niche is not provided");
+      return NextResponse.json({ error: "Niche is required" }, { status: 400 });
+    }
+
+    console.log("Niche:", niche);
 
     const completion = await openai.completions.create({
-      model: "text-davinci-003",
+      model: "gpt-3.5-turbo", // Use the supported model
       prompt: `Generate micro SaaS ideas for the following niche: ${niche}`,
       max_tokens: 100,
       temperature: 0.7,
     });
 
-    console.log("Completion:", completion); // Log the completion response for debugging
+    console.log("Completion:", completion);
 
     return NextResponse.json({ response: completion.choices[0].text });
   } catch (error) {
-    console.error("Error:", error); // Log the error for debugging
+    console.error("Error:", error);
 
     return NextResponse.json(
       {

@@ -12,7 +12,15 @@ export default function Home() {
     setError("");
     setResponse("");
     try {
-      const res = await axios.post("/api/generateIdeas", { niche });
+      const res = await axios.post(
+        "/api/generateIdeas",
+        { niche },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setResponse(res.data.response);
     } catch (error) {
       setError("Error: Unable to fetch ideas from GPT-3 API");
