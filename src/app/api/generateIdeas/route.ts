@@ -20,16 +20,24 @@ export async function POST(req: NextRequest) {
 
     console.log("Niche:", niche);
 
-    const completion = await openai.completions.create({
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo", // Use the supported model
-      prompt: `Generate micro SaaS ideas for the following niche: ${niche}`,
+      messages: [
+        { role: "system", content: "You are a helpful assistant." },
+        {
+          role: "user",
+          content: `Generate micro SaaS ideas for the following niche: ${niche}`,
+        },
+      ],
       max_tokens: 100,
       temperature: 0.7,
     });
 
     console.log("Completion:", completion);
 
-    return NextResponse.json({ response: completion.choices[0].text });
+    return NextResponse.json({
+      response: completion.choices[0].message.content,
+    });
   } catch (err: unknown) {
     console.error("Error:", err);
 

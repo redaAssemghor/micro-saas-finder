@@ -1,45 +1,38 @@
 "use client";
+
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
 
 export default function Home() {
   const [niche, setNiche] = useState("");
-  const [response, setResponse] = useState("");
-  const [error, setError] = useState("");
+  const [ideas, setIdeas] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setResponse("");
-    try {
-      const res = await axios.post(
-        "/api/generateIdeas",
-        { niche },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setResponse(res.data.response);
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response && err.response.status === 429) {
-          setError(
-            "You have exceeded your quota. Please check your plan and billing details."
-          );
-        } else {
-          setError("Error: Unable to fetch ideas from GPT-3 API");
-        }
-      } else {
-        setError("An unexpected error occurred");
-      }
-      console.error("API Error:", err);
-    }
-  };
+    setLoading(true);
 
-  const handleRandomNiche = () => {
-    setNiche("indie hackers");
+    try {
+      const response = await fetch("/api/generateIdeas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ niche }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setIdeas(data.response);
+      } else {
+        console.error("Failed to fetch ideas:", response.statusText);
+        setIdeas("Failed to fetch ideas. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setIdeas("An error occurred. Please try again.");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -61,15 +54,15 @@ export default function Home() {
         </h2>
         <input
           type="text"
+          placeholder="e.g. indie hackers"
           value={niche}
           onChange={(e) => setNiche(e.target.value)}
-          placeholder="e.g. indie hackers"
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg"
         />
         <div className="flex flex-col md:flex-row justify-between gap-4">
           <button
             type="button"
-            onClick={handleRandomNiche}
+            onClick={() => setNiche("random")}
             className="w-full md:w-auto bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
           >
             Random Niche
@@ -78,20 +71,14 @@ export default function Home() {
             type="submit"
             className="w-full md:w-auto bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition duration-300"
           >
-            Generate FREE Ideas
+            {loading ? "Loading..." : "Generate FREE Ideas"}
           </button>
         </div>
       </form>
-      {response && (
+      {ideas && (
         <div className="mt-8 w-full max-w-md bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl font-semibold mb-4">Generated Ideas</h2>
-          <p>{response}</p>
-        </div>
-      )}
-      {error && (
-        <div className="mt-8 w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4">Error</h2>
-          <p>{error}</p>
+          <p className="whitespace-pre-wrap">{ideas}</p>
         </div>
       )}
     </main>
