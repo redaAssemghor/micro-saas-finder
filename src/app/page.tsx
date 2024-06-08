@@ -1,38 +1,32 @@
 "use client";
 
 import { useState } from "react";
+import { useAction, useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 
 export default function Home() {
   const [niche, setNiche] = useState("");
   const [ideas, setIdeas] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setLoading(true);
-
     try {
-      const response = await fetch("/api/generateIdeas", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ niche }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setIdeas(data.response);
+      const response = await generateIdeas({ niche });
+      if (response !== null) {
+        setIdeas(response);
       } else {
-        console.error("Failed to fetch ideas:", response.statusText);
-        setIdeas("Failed to fetch ideas. Please try again.");
+        setIdeas("No response received");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setIdeas("An error occurred. Please try again.");
+      if (error instanceof Error) {
+        setIdeas(`Error: ${error.message}`);
+      } else {
+        setIdeas("An unknown error occurred");
+      }
     }
-
-    setLoading(false);
   };
 
   return (
