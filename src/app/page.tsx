@@ -4,9 +4,15 @@ import { useState } from "react";
 import { useAction, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
+// Define the type for an idea
+interface Idea {
+  title: string;
+  description: string;
+}
+
 export default function Home() {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState<string[]>([]);
+  const [ideas, setIdeas] = useState<Idea[]>([]); // Explicitly define the type as Idea[]
   const [loading, setLoading] = useState(false);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
@@ -15,16 +21,17 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await generateIdeas({ niche });
+      const response: Idea[] = await generateIdeas({ niche }); // Ensure response is typed as Idea[]
       if (response !== null) {
+        setIdeas(response);
       } else {
-        setIdeas(["No response received"]);
+        setIdeas([{ title: "No response received", description: "" }]);
       }
     } catch (error) {
       if (error instanceof Error) {
-        setIdeas([`Error: ${error.message}`]);
+        setIdeas([{ title: `Error: ${error.message}`, description: "" }]); // Wrap error message in an object
       } else {
-        setIdeas(["An unknown error occurred"]);
+        setIdeas([{ title: "An unknown error occurred", description: "" }]); // Wrap error message in an object
       }
     }
     setLoading(false);
@@ -66,21 +73,22 @@ export default function Home() {
           <button
             type="submit"
             className="w-full md:w-auto bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition duration-300"
+            disabled={loading} // Disable button when loading
           >
             {loading ? "Loading..." : "Generate FREE Ideas"}
           </button>
         </div>
       </form>
-      {ideas &&
-        ideas.map((idea, i) => (
-          <div
-            key={i}
-            className="mt-8 w-full max-w-md bg-white shadow-lg rounded-lg p-6"
-          >
-            <h2 className="text-2xl font-semibold mb-4">Generated Ideas</h2>
-            <p className="whitespace-pre-wrap">{idea}</p>
-          </div>
-        ))}
+      {ideas.length > 0 && (
+        <div className="mt-8 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {ideas.map((idea, i) => (
+            <div key={i} className="bg-white shadow-lg rounded-lg p-6">
+              <h3 className="text-xl font-bold">{idea.title}</h3>
+              <p className="whitespace-pre-wrap">{idea.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 }

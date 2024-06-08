@@ -15,6 +15,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as generateMicroSaaS from "../generateMicroSaaS.js";
+import type * as generateRandomNiche from "../generateRandomNiche.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -26,6 +27,7 @@ import type * as generateMicroSaaS from "../generateMicroSaaS.js";
  */
 declare const fullApi: ApiFromModules<{
   generateMicroSaaS: typeof generateMicroSaaS;
+  generateRandomNiche: typeof generateRandomNiche;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
