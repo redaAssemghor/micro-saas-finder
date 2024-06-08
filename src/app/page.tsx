@@ -6,19 +6,20 @@ import { api } from "../../convex/_generated/api";
 
 export default function Home() {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState("");
+  const [ideas, setIdeas] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await generateIdeas({ niche });
       if (response !== null) {
         setIdeas(response);
       } else {
-        setIdeas("No response received");
+        setIdeas(["No response received"]);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -27,6 +28,8 @@ export default function Home() {
         setIdeas("An unknown error occurred");
       }
     }
+    setLoading(false);
+    console.log(ideas);
   };
 
   return (
@@ -69,12 +72,16 @@ export default function Home() {
           </button>
         </div>
       </form>
-      {ideas && (
-        <div className="mt-8 w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4">Generated Ideas</h2>
-          <p className="whitespace-pre-wrap">{ideas}</p>
-        </div>
-      )}
+      {ideas &&
+        ideas.map((idea, i) => (
+          <div
+            key={i}
+            className="mt-8 w-full max-w-md bg-white shadow-lg rounded-lg p-6"
+          >
+            <h2 className="text-2xl font-semibold mb-4">Generated Ideas</h2>
+            <p className="whitespace-pre-wrap">{idea}</p>
+          </div>
+        ))}
     </main>
   );
 }

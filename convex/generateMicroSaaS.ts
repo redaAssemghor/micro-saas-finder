@@ -21,6 +21,11 @@ export const generateIdeas = action({
     });
 
     const ideas = completion.choices[0].message.content;
-    return ideas;
+
+    const ideasArray = ideas
+      ? ideas.split("\n").filter((idea) => idea.trim().length > 0)
+      : null;
+
+    return ideasArray;
   },
 });
