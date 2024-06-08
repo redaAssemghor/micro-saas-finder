@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useAction, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
-// Define the type for an idea
 interface Idea {
   title: string;
   description: string;
@@ -16,6 +15,21 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
+  const generateNiche = useAction(api.generateRandomNiche.generateNiche);
+
+  const getRandomNiche = async () => {
+    try {
+      const response = await generateNiche();
+      if (typeof response === "string") {
+        setNiche(response);
+      } else {
+        setNiche("");
+      }
+    } catch (error) {
+      setNiche("");
+    }
+    console.log(niche);
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -65,7 +79,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between gap-4">
           <button
             type="button"
-            onClick={() => setNiche("random")}
+            onClick={getRandomNiche}
             className="w-full md:w-auto bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
           >
             Random Niche
@@ -82,9 +96,14 @@ export default function Home() {
       {ideas.length > 0 && (
         <div className="mt-8 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {ideas.map((idea, i) => (
-            <div key={i} className="bg-white shadow-lg rounded-lg p-6">
-              <h3 className="text-xl font-bold">{idea.title}</h3>
-              <p className="whitespace-pre-wrap">{idea.description}</p>
+            <div
+              key={i}
+              className="bg-blue-100 shadow-lg rounded-lg p-6 hover:bg-blue-200 transition duration-300"
+            >
+              <h3 className="text-xl font-bold mb-2">{idea.title}</h3>
+              <p className="whitespace-pre-wrap text-gray-700">
+                {idea.description}
+              </p>
             </div>
           ))}
         </div>

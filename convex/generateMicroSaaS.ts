@@ -22,7 +22,6 @@ export const generateIdeas = action({
 
     const ideas = completion.choices[0].message.content;
 
-    // Process the ideas into an array of objects with title and description
     const ideasArray = ideas
       ? ideas
           .split("\n")

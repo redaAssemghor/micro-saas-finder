@@ -8,7 +8,8 @@ const openai = new OpenAI({
 
 export const generateNiche = action({
   handler: async () => {
-    const prompt = "Generate a unique niche name for a tech SaaS.";
+    const prompt =
+      "Generate a random tech niche . The name should be one to two words only.";
 
     const completion = await openai.chat.completions.create({
       messages: [
@@ -17,10 +18,14 @@ export const generateNiche = action({
       ],
 
       model: "gpt-3.5-turbo",
+      max_tokens: 10,
     });
 
     const niche = completion.choices[0].message.content;
 
-    return niche;
+    const nicheWords =
+      niche !== null && niche.split(/\s+/).slice(0, 2).join(" ");
+
+    return nicheWords;
   },
 });
