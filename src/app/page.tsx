@@ -6,7 +6,7 @@ import { api } from "../../convex/_generated/api";
 
 export default function Home() {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState([]);
+  const [ideas, setIdeas] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
@@ -15,7 +15,7 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response: any = await generateIdeas({ niche });
+      const response = await generateIdeas({ niche });
       if (response !== null) {
         setIdeas(response);
       } else {
@@ -23,9 +23,9 @@ export default function Home() {
       }
     } catch (error) {
       if (error instanceof Error) {
-        setIdeas(`Error: ${error.message}`);
+        setIdeas([`Error: ${error.message}`]);
       } else {
-        setIdeas("An unknown error occurred");
+        setIdeas(["An unknown error occurred"]);
       }
     }
     setLoading(false);
