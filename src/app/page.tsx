@@ -17,7 +17,6 @@ export default function Home() {
     try {
       const response = await generateIdeas({ niche });
       if (response !== null) {
-        setIdeas(response);
       } else {
         setIdeas(["No response received"]);
       }
