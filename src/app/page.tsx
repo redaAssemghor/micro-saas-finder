@@ -15,7 +15,7 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await generateIdeas({ niche });
+      const response: any = await generateIdeas({ niche });
       if (response !== null) {
         setIdeas(response);
       } else {
