@@ -67,7 +67,7 @@ export default function Home() {
         className="w-full max-w-md bg-white shadow-lg rounded-lg p-6"
       >
         <h2 className="text-2xl font-semibold mb-4">
-          Step 1: Enter a niche or choose random
+          Step 1: Enter a niche or click random
         </h2>
         <input
           type="text"
