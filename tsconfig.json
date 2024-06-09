@@ -30,5 +30,5 @@
     "src/app/page.js",
     "src/app/page.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "jest.config.js", "babel.config.js"]
 }

@@ -24,16 +24,14 @@ export const generateIdeas = action({
 
     const ideasArray = ideas
       ? ideas
-          .split("\n")
-          .filter((idea) => idea.trim().length > 0)
+          .split("\n\n") // Assuming each idea is separated by a double newline
           .map((idea) => {
-            const [title, ...descriptionParts] = idea.split(":");
-            const description =
-              descriptionParts.join(":").split(". ").slice(0, 4).join(". ") +
-              ".";
+            const [titlePart, ...descriptionParts] = idea.split("\n");
+            const title = titlePart.replace(/^\d+\.\s*/, "").trim();
+            const description = descriptionParts.join(" ").trim();
             return {
-              title: title.trim(),
-              description: description.trim(),
+              title,
+              description,
             };
           })
       : [];
