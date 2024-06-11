@@ -19,8 +19,8 @@ const Payment = () => {
       <div className="flex flex-col md:flex-row gap-8 justify-center items-start mb-8">
         {/* 40 Credits Card */}
         <div className="w-full md:w-1/2 p-5 bg-white rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-blue-600 mb-2">40 credits</h2>
-          <p className="text-gray-600 mb-4">
+          <h2 className="text-xl font-black">40 credits</h2>
+          <p className="text-gray-600 mb-4 font-semibold text-lg">
             40 chances to find your next profitable Micro Saas Idea
           </p>
           <div className="flex items-baseline mb-4">
@@ -54,15 +54,17 @@ const Payment = () => {
               Save Micro Saas Ideas and SEO Reports to your Dashboard
             </li>
           </ul>
-          <button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2 w-full">
-            Find Startup Ideas
-          </button>
-          <h6 className="text-gray-600">One time payment.</h6>
+          <div className="flex flex-col items-center">
+            <button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2 w-full">
+              Find Startup Ideas
+            </button>
+            <h6 className="text-gray-400 text-sm">One time payment.</h6>
+          </div>
         </div>
 
         {/* 100 Credits Card */}
         <div className="w-full md:w-1/2 p-5 bg-blue-100 rounded-lg shadow-lg relative">
-          <div className="absolute top-0 right-0 bg-red-600 text-white text-xs px-2 py-1 rounded-bl-lg">
+          <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs px-2 py-1 rounded-bl-lg">
             POPULAR
           </div>
           <h2 className="text-2xl font-bold text-blue-800 mb-2">100 credits</h2>
@@ -100,10 +102,12 @@ const Payment = () => {
               Save Micro Saas Ideas and SEO Reports to your Dashboard
             </li>
           </ul>
-          <button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2 w-full">
-            Find Startup Ideas
-          </button>
-          <h6 className="text-gray-600">One time payment.</h6>
+          <div className="flex flex-col items-center">
+            <button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 mb-2 w-full">
+              Find Startup Ideas
+            </button>
+            <h6 className="text-gray-400 text-sm">One time payment.</h6>
+          </div>
         </div>
       </div>
 

@@ -37,9 +37,12 @@ const Header = () => {
               <FaEnvelope className="text-xl" />
               <span>Newsletter</span>
             </Link>
-            <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300">
+            <Link
+              href="/signin"
+              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
+            >
               Login
-            </button>
+            </Link>
           </nav>
           <button
             className="block md:hidden text-xl text-gray-700"
