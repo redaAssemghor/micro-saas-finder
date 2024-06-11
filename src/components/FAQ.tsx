@@ -40,7 +40,7 @@ const faqs: FAQItem[] = [
   {
     question: "How can I report a bug or ask a question?",
     answer:
-      "You can email us at tony@findmicrosaasideas.com! We would be happy to help you!",
+      "You can email us at assemghor.reda@gmail.com! We would be happy to help you!",
   },
 ];
 
