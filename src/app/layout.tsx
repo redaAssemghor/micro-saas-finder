@@ -23,7 +23,6 @@ export default function RootLayout({
       <body>
         <ConvexClerkProvider>
           <Header />
-          <AnnouncementBar />
           <main>{children}</main>
           <Footer />
         </ConvexClerkProvider>

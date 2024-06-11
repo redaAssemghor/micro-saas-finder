@@ -70,7 +70,7 @@ export default function Home() {
             Get Customers on Autopilot
           </span>
         </h1>
-        <p className="text-xl text-gray-500 font-semibold my-8">
+        <p className=" text-gray-500 font-semibold my-8">
           The only tool you need to find your next startup idea that your
           customers are already looking for. Enter your niche and get 10 FREE
           Micro SaaS ideas.
@@ -80,7 +80,7 @@ export default function Home() {
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white shadow-lg rounded-lg p-6"
       >
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-xl font-bold mb-4">
           Step 1: Enter a niche or click random
         </h2>
         <input
