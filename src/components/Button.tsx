@@ -1,6 +1,6 @@
 const Button = () => {
   return (
-    <div className="w-full min-h-screen inset-0 flex items-center justify-center bg-slate-700 text-center z-50 p-4 sm:p-8">
+    <div className="w-full min-h-screen inset-0 flex items-center justify-center bg-slate-700 text-center p-4 sm:p-8 z-10">
       <div className="text-white max-w-3xl mx-auto">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">
           Find validated startup ideas in a couple of clicks

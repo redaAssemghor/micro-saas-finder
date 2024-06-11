@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-stone-200 shadow-md">
+    <header className="sticky top-0 z-50 bg-stone-200 shadow-md">
       <div className="p-3">
         <div className="container mx-auto flex justify-between items-center">
           <a href="/" className="flex items-center gap-4">
