@@ -1,4 +1,3 @@
-// src/__tests__/generateIdeas.test.js
 import { generateIdeas } from "../../convex/generateMicroSaaS";
 import OpenAI from "openai";
 

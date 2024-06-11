@@ -1,5 +1,4 @@
 import { action } from "./_generated/server";
-import { v } from "convex/values";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -9,23 +8,24 @@ const openai = new OpenAI({
 export const generateNiche = action({
   handler: async () => {
     const prompt =
-      "Generate a random tech niche . The name should be one to two words only.";
+      "Generate a random niche. The name should be an abstruct field like 'crypto wallets', 'art', 'medicien' . Do not include quotation marks around the word.";
 
     const completion = await openai.chat.completions.create({
       messages: [
         { role: "system", content: "You are a helpful assistant." },
         { role: "user", content: prompt },
       ],
-
       model: "gpt-3.5-turbo",
       max_tokens: 10,
     });
 
-    const niche = completion.choices[0].message.content;
+    const message = completion.choices[0].message;
 
-    const nicheWords =
-      niche !== null && niche.split(/\s+/).slice(0, 2).join(" ");
+    if (message && message.content) {
+      const niche = message.content.trim().replace(/^"|"$/g, ""); // Remove any surrounding quotes
+      return niche;
+    }
 
-    return nicheWords;
+    return "No niche generated";
   },
 });

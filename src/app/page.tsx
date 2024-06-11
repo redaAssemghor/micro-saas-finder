@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useAction, useQuery } from "convex/react";
+import { useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import Info from "../components/Info";
 
 interface Idea {
   title: string;
@@ -11,13 +12,14 @@ interface Idea {
 
 export default function Home() {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState<Idea[]>([]); // Explicitly define the type as Idea[]
+  const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(false);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
   const generateNiche = useAction(api.generateRandomNiche.generateNiche);
 
   const getRandomNiche = async () => {
+    setLoading(true);
     try {
       const response = await generateNiche();
       if (typeof response === "string") {
@@ -27,6 +29,8 @@ export default function Home() {
       }
     } catch (error) {
       setNiche("");
+    } finally {
+      setLoading(false);
     }
     console.log(niche);
   };
@@ -35,20 +39,21 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response: Idea[] = await generateIdeas({ niche }); // Ensure response is typed as Idea[]
-      if (response !== null) {
+      const response = await generateIdeas({ niche });
+      if (response && Array.isArray(response)) {
         setIdeas(response);
       } else {
         setIdeas([{ title: "No response received", description: "" }]);
       }
     } catch (error) {
       if (error instanceof Error) {
-        setIdeas([{ title: `Error: ${error.message}`, description: "" }]); // Wrap error message in an object
+        setIdeas([{ title: `Error: ${error.message}`, description: "" }]);
       } else {
-        setIdeas([{ title: "An unknown error occurred", description: "" }]); // Wrap error message in an object
+        setIdeas([{ title: "An unknown error occurred", description: "" }]);
       }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
     console.log(ideas);
   };
 
@@ -61,6 +66,11 @@ export default function Home() {
             Get Customers on Autopilot
           </span>
         </h1>
+        <p className="text-xl text-gray-500 font-semibold my-8">
+          The only tool you need to find your next startup idea that your
+          customers are already looking for. Enter your niche and get 10 FREE
+          Micro SaaS ideas.
+        </p>
       </div>
       <form
         onSubmit={handleSubmit}
@@ -81,13 +91,14 @@ export default function Home() {
             type="button"
             onClick={getRandomNiche}
             className="w-full md:w-auto bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
+            disabled={loading}
           >
             Random Niche
           </button>
           <button
             type="submit"
             className="w-full md:w-auto bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition duration-300"
-            disabled={loading} // Disable button when loading
+            disabled={loading}
           >
             {loading ? "Loading..." : "Generate FREE Ideas"}
           </button>
@@ -108,6 +119,7 @@ export default function Home() {
           ))}
         </div>
       )}
+      <Info />
     </main>
   );
 }
