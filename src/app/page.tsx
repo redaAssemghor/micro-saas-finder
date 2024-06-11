@@ -5,6 +5,9 @@ import { useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Info from "../components/Info";
 import Payment from "@/components/Payment";
+import Link from "next/link";
+import Button from "@/components/Button";
+import FAQ from "@/components/FAQ";
 
 interface Idea {
   title: string;
@@ -122,6 +125,8 @@ export default function Home() {
       )}
       <Info />
       <Payment />
+      <Button />
+      <FAQ />
     </main>
   );
 }
