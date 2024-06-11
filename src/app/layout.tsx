@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
 import AnnouncementBar from "@/components/AnnouncementBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "Free Ideas generator | find yor big saas",
-  description: "Generate saas ideas ",
+  title: "Free Ideas generator | find your big saas",
+  description: "Generate saas ideas",
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.className}>
       <body>
         <ConvexClerkProvider>
           <Header />
