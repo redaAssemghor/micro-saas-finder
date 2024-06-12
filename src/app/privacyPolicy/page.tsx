@@ -74,7 +74,7 @@ const PrivacyPolicy = () => {
           </p>
 
           <h2 className="text-lg font-semibold text-blue-600 mt-8 mb-2">
-            5. Children's Privacy
+            5. Children&apos;s Privacy
           </h2>
           <p className="mb-4">
             MicroSaasFinder does not knowingly collect any personal information
