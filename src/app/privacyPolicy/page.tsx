@@ -15,8 +15,7 @@ const PrivacyPolicy = () => {
           <p className="mb-6 text-center">Last Updated: 2024-14-06</p>
 
           <p className="mb-4">
-            Thank you for visiting MicroSaasFinder ("we," "us," or "our"). This
-            Privacy Policy outlines how we collect, use, and protect your
+            This Privacy Policy outlines how we collect, use, and protect your
             personal and non-personal information when you use our website
             located at{" "}
             <a
