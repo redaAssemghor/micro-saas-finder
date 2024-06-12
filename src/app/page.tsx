@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import Info from "../components/Info";
@@ -18,6 +18,7 @@ export default function Home() {
   const [niche, setNiche] = useState("");
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
   const generateNiche = useAction(api.generateRandomNiche.generateNiche);
@@ -61,6 +62,12 @@ export default function Home() {
     console.log(ideas);
   };
 
+  const scrollToForm = () => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-5">
       <div className="mb-8 text-center">
@@ -77,6 +84,7 @@ export default function Home() {
         </p>
       </div>
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white shadow-lg rounded-lg p-6"
       >
@@ -125,7 +133,7 @@ export default function Home() {
       )}
       <Info />
       <Payment />
-      <Button />
+      <Button scrollToForm={scrollToForm} />
       <FAQ />
     </main>
   );
