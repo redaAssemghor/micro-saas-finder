@@ -18,7 +18,7 @@ export default function Home() {
   const [niche, setNiche] = useState("");
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   const generateIdeas = useAction(api.generateMicroSaaS.generateIdeas);
   const generateNiche = useAction(api.generateRandomNiche.generateNiche);
@@ -70,7 +70,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-5">
-      <div className="mb-8 text-center">
+      <div ref={formRef} className="mb-8 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl text-yellow-500 font-black leading-tight mb-4">
           Find Validated Micro Saas Ideas,
           <span className="text-blue-950 block">
@@ -84,7 +84,6 @@ export default function Home() {
         </p>
       </div>
       <form
-        ref={formRef}
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white shadow-lg rounded-lg p-6"
       >
