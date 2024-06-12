@@ -8,4 +8,7 @@ export default defineSchema({
     email: v.string(),
     imageUrl: v.string(),
   }),
+  subscriptions: defineTable({
+    email: v.string(),
+  }),
 });

@@ -36,7 +36,7 @@ const Footer = () => {
             <h2 className="text-base font-semibold mb-4">LINKS</h2>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/support" passHref>
+                <Link href="mailto:assemghor.reda@gmail.com" passHref>
                   <span className="hover:text-blue-500 transition duration-300 cursor-pointer">
                     Support
                   </span>
@@ -63,14 +63,14 @@ const Footer = () => {
             <h2 className="text-base font-semibold mb-4">LEGAL</h2>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/terms" passHref>
+                <Link href="/privacyPolicy" passHref>
                   <span className="hover:text-blue-500 transition duration-300 cursor-pointer">
                     Terms of services
                   </span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" passHref>
+                <Link href="/privacyPolicy" passHref>
                   <span className="hover:text-blue-500 transition duration-300 cursor-pointer">
                     Privacy policy
                   </span>

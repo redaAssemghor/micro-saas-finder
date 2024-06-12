@@ -8,7 +8,7 @@ import { useAuth, UserButton } from "@clerk/nextjs";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const userId = useAuth();
+  const { userId } = useAuth(); // Destructure userId from useAuth
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,13 +39,19 @@ const Header = () => {
               <FaEnvelope className="text-xl" />
               <span>Newsletter</span>
             </Link>
-            <Link
-              href="/signin"
-              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
-            >
-              Login
-            </Link>
-            {userId ? <UserButton /> : ""}
+
+            {userId ? (
+              <div className="flex items-center bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 transition duration-300">
+                <UserButton />
+              </div>
+            ) : (
+              <Link
+                href="/signin"
+                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
+              >
+                Login
+              </Link>
+            )}
           </nav>
           <button
             className="block md:hidden text-xl text-gray-700"
@@ -90,12 +96,19 @@ const Header = () => {
                 <FaEnvelope className="text-xl" />
                 <span>Newsletter</span>
               </a>
-              <button
-                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
-                onClick={toggleMenu}
-              >
-                Login
-              </button>
+              {userId ? (
+                <div className="flex items-center bg-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 transition duration-300">
+                  <UserButton />
+                </div>
+              ) : (
+                <Link
+                  href="/signin"
+                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
+                  onClick={toggleMenu}
+                >
+                  Login
+                </Link>
+              )}
             </nav>
           </div>
         )}
