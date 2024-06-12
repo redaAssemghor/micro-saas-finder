@@ -1,8 +1,9 @@
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import { httpRouter } from "convex/server";
 import { Webhook } from "svix";
+
+import { internal } from "./_generated/api";
 import { httpAction } from "./_generated/server";
-import { createUser } from "./users"; // Import the mutation function
 
 // Ensure the required environment variable is available
 function ensureEnvironmentVariable(name: string): string {
@@ -16,7 +17,7 @@ function ensureEnvironmentVariable(name: string): string {
 const webhookSecret = ensureEnvironmentVariable("CLERK_WEBHOOK_SECRET");
 
 const handleClerkWebhook = httpAction(async (ctx, request) => {
-  console.log("Webhook received");
+  console.log("Received webhook request");
 
   const event = await validateRequest(request);
   if (!event) {
@@ -26,24 +27,37 @@ const handleClerkWebhook = httpAction(async (ctx, request) => {
 
   console.log("Received event:", event);
 
-  if (event.type === "user.created") {
-    console.log("User created event data:", event.data);
-    const userData = event.data;
+  switch (event.type) {
+    case "user.created":
+      try {
+        await ctx.runMutation(internal.users.createUser, {
+          clerkId: event.data.id,
+          email: event.data.email_addresses[0].email_address,
+          imageUrl: event.data.image_url,
+          name: event.data.first_name!,
+        });
+        console.log("User created:", event.data.id);
+      } catch (error) {
+        console.error("Failed to create user:", error);
+        return new Response("Failed to create user", { status: 500 });
+      }
+      break;
 
-    try {
-      await ctx.runMutation({
-        name: "createUser",
-        args: {
-          clerkId: userData.id,
-          name: userData.first_name,
-          email: userData.email_addresses[0].email_address,
-          imageUrl: userData.image_url || "",
-        },
-      });
-      console.log("User creation mutation called successfully");
-    } catch (error) {
-      console.error("Error calling createUser mutation:", error);
-    }
+    case "user.deleted":
+      try {
+        await ctx.runMutation(internal.users.deleteUser, {
+          clerkId: event.data.id as string,
+        });
+        console.log("User deleted:", event.data.id);
+      } catch (error) {
+        console.error("Failed to delete user:", error);
+        return new Response("Failed to delete user", { status: 500 });
+      }
+      break;
+
+    default:
+      console.log("Ignored event type:", event.type);
+      break;
   }
 
   return new Response(null, { status: 200 });
@@ -61,10 +75,6 @@ async function validateRequest(
 ): Promise<WebhookEvent | undefined> {
   const payloadString = await req.text();
   const headerPayload = req.headers;
-
-  console.log("Headers:", headerPayload);
-  console.log("Payload:", payloadString);
-
   const svixHeaders = {
     "svix-id": headerPayload.get("svix-id")!,
     "svix-timestamp": headerPayload.get("svix-timestamp")!,
@@ -76,6 +86,7 @@ async function validateRequest(
 
   try {
     event = wh.verify(payloadString, svixHeaders) as WebhookEvent;
+    console.log("Webhook verified successfully:", event);
   } catch (error) {
     console.error("Error verifying webhook:", error);
     return;

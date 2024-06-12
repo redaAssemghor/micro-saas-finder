@@ -4,9 +4,11 @@ import { FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import AnnouncementBar from "./AnnouncementBar";
 import Link from "next/link";
+import { useAuth, UserButton } from "@clerk/nextjs";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const userId = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,6 +45,7 @@ const Header = () => {
             >
               Login
             </Link>
+            {userId ? <UserButton /> : ""}
           </nav>
           <button
             className="block md:hidden text-xl text-gray-700"
