@@ -1,5 +1,3 @@
-// pages/signin.tsx
-
 import { SignIn } from "@clerk/nextjs";
 
 const SignInPage = () => {

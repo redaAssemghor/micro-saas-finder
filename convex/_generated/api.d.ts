@@ -16,7 +16,6 @@ import type {
 } from "convex/server";
 import type * as generateMicroSaaS from "../generateMicroSaaS.js";
 import type * as generateRandomNiche from "../generateRandomNiche.js";
-import type * as http from "../http.js";
 import type * as subscriptions from "../subscriptions.js";
 import type * as users from "../users.js";
 
@@ -31,7 +30,6 @@ import type * as users from "../users.js";
 declare const fullApi: ApiFromModules<{
   generateMicroSaaS: typeof generateMicroSaaS;
   generateRandomNiche: typeof generateRandomNiche;
-  http: typeof http;
   subscriptions: typeof subscriptions;
   users: typeof users;
 }>;

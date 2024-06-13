@@ -28,14 +28,9 @@ const appearance = {
 };
 
 const ConvexClerkProvider = ({ children }: { children: ReactNode }) => (
-  <ClerkProvider
-    appearance={appearance}
-    publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY as string}
-  >
-    <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-      {children}
-    </ConvexProviderWithClerk>
-  </ClerkProvider>
+  <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+    {children}
+  </ConvexProviderWithClerk>
 );
 
 export default ConvexClerkProvider;
