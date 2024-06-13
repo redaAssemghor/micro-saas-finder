@@ -4,7 +4,7 @@ import { FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import AnnouncementBar from "./AnnouncementBar";
 import Link from "next/link";
-import { useAuth, UserButton } from "@clerk/nextjs";
+import { useAuth, UserButton, SignInButton } from "@clerk/nextjs";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +49,7 @@ const Header = () => {
                 href="/signin"
                 className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
               >
-                Login
+                Sign in
               </Link>
             )}
           </nav>
