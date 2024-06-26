@@ -22,13 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.className}>
       <body>
-        <ClerkProvider>
-          <ConvexClerkProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </ConvexClerkProvider>
-        </ClerkProvider>
+        <ConvexClerkProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </ConvexClerkProvider>
       </body>
     </html>
   );
