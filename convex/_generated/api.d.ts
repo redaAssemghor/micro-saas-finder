@@ -16,8 +16,6 @@ import type {
 } from "convex/server";
 import type * as generateMicroSaaS from "../generateMicroSaaS.js";
 import type * as generateRandomNiche from "../generateRandomNiche.js";
-import type * as subscriptions from "../subscriptions.js";
-import type * as users from "../users.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -30,8 +28,6 @@ import type * as users from "../users.js";
 declare const fullApi: ApiFromModules<{
   generateMicroSaaS: typeof generateMicroSaaS;
   generateRandomNiche: typeof generateRandomNiche;
-  subscriptions: typeof subscriptions;
-  users: typeof users;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

@@ -6,18 +6,10 @@ import { useMutation } from "convex/react";
 const Newsletter: React.FC = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const createSubscription = useMutation(api.subscriptions.createSubscription);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await createSubscription({ email });
-      setIsSubmitted(true);
-      setEmail(""); // Clear the input field
-    } catch (error) {
-      console.error("Subscription failed:", error);
-      alert("Subscription failed. Please try again.");
-    }
+    setIsSubmitted(true);
   };
 
   return (
