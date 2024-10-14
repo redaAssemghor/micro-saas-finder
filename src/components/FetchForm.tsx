@@ -1,4 +1,8 @@
-import { useRef, useState } from "react";
+import { addIdea } from "@/store/features/ideasSlice";
+import { setNiche } from "@/store/features/nicheSlice";
+import { RootState } from "@/store/store";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Idea {
   title: string;
@@ -6,9 +10,13 @@ interface Idea {
 }
 
 const FetchForm = () => {
-  const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState<Idea[]>([]);
+  // const [niche, setNiche] = useState("");
+  // const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const ideasSlice = useSelector((state: RootState) => state.ideas.value);
+  const nicheSlice = useSelector((state: RootState) => state.niche.value);
 
   const getRandomNiche = async () => {
     setLoading(true);
@@ -28,9 +36,12 @@ const FetchForm = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      setNiche(data.content);
+      // setNiche(data.content);
+      dispatch(setNiche(data.content));
     } catch (error) {
       console.error("Error fetching random niche:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,7 +52,7 @@ const FetchForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ keyword: niche }),
+        body: JSON.stringify({ keyword: nicheSlice }),
       });
 
       if (!response.ok) {
@@ -49,7 +60,7 @@ const FetchForm = () => {
       }
 
       const data = await response.json();
-      setIdeas(data.ideas);
+      dispatch(addIdea(data.ideas));
       console.log("Ideas received from API:", data.ideas);
     } catch (error) {
       console.error("Error fetching ideas:", error);
@@ -62,12 +73,12 @@ const FetchForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!niche) {
+    if (!nicheSlice) {
       alert("Please enter a niche.");
       setLoading(false);
       return;
     }
-    fetchIdeas(niche);
+    fetchIdeas(nicheSlice);
   };
 
   return (
@@ -95,7 +106,7 @@ const FetchForm = () => {
         <input
           type="text"
           placeholder="e.g. indie hackers"
-          value={niche}
+          value={nicheSlice}
           onChange={(e) => setNiche(e.target.value)}
           className="w-full p-3 mb-4 border border-gray-300 rounded-lg"
         />
@@ -117,21 +128,6 @@ const FetchForm = () => {
           </button>
         </div>
       </form>
-      {ideas.length > 0 && (
-        <div className="mt-8 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {ideas.map((idea, i) => (
-            <div
-              key={i}
-              className="bg-blue-100 shadow-lg rounded-lg p-6 hover:bg-blue-200 transition duration-300"
-            >
-              <h3 className="text-xl font-bold mb-2">{idea.title}</h3>
-              <p className="whitespace-pre-wrap text-gray-700">
-                {idea.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
     </main>
   );
 };

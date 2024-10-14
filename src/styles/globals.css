@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --yallow: #ffc93c;
+  --orange: #ff9a3c;
+  --orange-dark: #ff6f3c;
+  --dark-blue: #155263;
+}

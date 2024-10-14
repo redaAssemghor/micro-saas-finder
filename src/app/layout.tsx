@@ -4,8 +4,6 @@ import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
-import AnnouncementBar from "@/components/AnnouncementBar";
-import { ClerkProvider } from "@clerk/nextjs";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 

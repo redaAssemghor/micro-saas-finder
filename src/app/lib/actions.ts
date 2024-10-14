@@ -16,7 +16,7 @@ export async function getGroqChatCompletion(prompt: string) {
 
 // fetch ideas action
 export async function getSaasIdeas(keyword: string) {
-  const prompt = `Generate five innovative SaaS startup ideas related to "${keyword}". Provide a brief description for each idea.`;
+  const prompt = `Generate five innovative SaaS startup ideas related to "${keyword}". Provide a brief description for each idea, no special characters.`;
 
   const response = await groq.chat.completions.create({
     messages: [
@@ -30,6 +30,7 @@ export async function getSaasIdeas(keyword: string) {
 
   const content = response.choices[0]?.message?.content || "";
   const ideas = parseIdeas(content);
+  console.log("Ideas generated:", ideas);
 
   return ideas;
 }

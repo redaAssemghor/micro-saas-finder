@@ -1,17 +1,12 @@
 "use client";
-import { useState, useRef } from "react";
-import { useAction } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { store } from "../store/store";
+import { Provider } from "react-redux";
 import Info from "../components/Info";
 import Payment from "@/components/Payment";
 import Button from "@/components/Button";
 import FAQ from "@/components/FAQ";
 import FetchForm from "@/components/FetchForm";
-
-interface Idea {
-  title: string;
-  description: string;
-}
+import { useRef } from "react";
 
 export default function Home() {
   const formRef = useRef<HTMLDivElement>(null);
@@ -24,11 +19,13 @@ export default function Home() {
 
   return (
     <main>
-      <FetchForm />
-      <Info />
-      <Payment />
-      <Button scrollToForm={scrollToForm} />
-      <FAQ />
+      <Provider store={store}>
+        <FetchForm />
+        <Info />
+        <Payment />
+        <Button scrollToForm={scrollToForm} />
+        <FAQ />
+      </Provider>
     </main>
   );
 }
