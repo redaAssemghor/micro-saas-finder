@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as generateMicroSaaS from "../generateMicroSaaS.js";
 import type * as generateRandomNiche from "../generateRandomNiche.js";
+import type * as hugginfaceGpt2 from "../hugginfaceGpt2.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -28,6 +29,7 @@ import type * as generateRandomNiche from "../generateRandomNiche.js";
 declare const fullApi: ApiFromModules<{
   generateMicroSaaS: typeof generateMicroSaaS;
   generateRandomNiche: typeof generateRandomNiche;
+  hugginfaceGpt2: typeof hugginfaceGpt2;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
