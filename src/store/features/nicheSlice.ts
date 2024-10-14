@@ -5,18 +5,18 @@ interface NicheState {
 }
 
 const initialState: NicheState = {
-  value: "NicheState",
+  value: "",
 };
 
 export const nicheSlice = createSlice({
   name: "niche",
   initialState,
   reducers: {
-    setNiche: (state, action) => {
+    setNicheSlice: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const { setNiche } = nicheSlice.actions;
+export const { setNicheSlice } = nicheSlice.actions;
 export default nicheSlice.reducer;
