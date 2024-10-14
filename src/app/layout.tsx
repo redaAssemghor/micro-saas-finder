@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
+import ClerkProvider from "@/providers/ClerkProvider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -20,11 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.className}>
       <body>
-        <ConvexClerkProvider>
+        <ClerkProvider>
           <Header />
           <main>{children}</main>
           <Footer />
-        </ConvexClerkProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
