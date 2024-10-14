@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Results from "./Results";
 import { setNicheSlice } from "@/store/features/nicheSlice";
+import Input from "./ui/Input";
+import Button from "./ui/Button";
 
 type Idea = {
   title: string;
@@ -16,7 +18,6 @@ const FetchForm = () => {
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
   const [loading, setLoading] = useState(false);
-  const [showCards, setShowCards] = useState(false);
 
   const dispatch = useDispatch();
   const ideasSlice = useSelector((state: RootState) => state.ideas.value);
@@ -72,7 +73,6 @@ const FetchForm = () => {
       console.error("Error fetching ideas:", error);
     } finally {
       setLoading(false);
-      setShowCards(true);
     }
   };
 
@@ -107,34 +107,15 @@ const FetchForm = () => {
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md bg-white shadow-lg rounded-lg p-6"
+          className="w-full max-w-2xl bg-[--dark] text-white shadow-lg rounded-lg lg:p-12 p-3"
         >
           <h2 className="text-xl font-bold mb-4">
             Step 1: Enter a niche or click random
           </h2>
-          <input
-            type="text"
-            placeholder="e.g. indie hackers"
-            value={niche}
-            onChange={(e) => setNiche(e.target.value)}
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg"
-          />
+          <Input setNiche={setNiche} niche={niche} />
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <button
-              type="button"
-              onClick={getRandomNiche}
-              className="w-full md:w-auto bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
-              disabled={loading}
-            >
-              Random Niche
-            </button>
-            <button
-              type="submit"
-              className="w-full md:w-auto bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 transition duration-300"
-              disabled={loading}
-            >
-              {loading ? "Loading..." : "Generate FREE Ideas"}
-            </button>
+            <Button onclick={getRandomNiche} text={'Random Niche'} type={'button'} />
+            <Button type={'submit'} text={'Generate FREE Ideas'} />
           </div>
         </form>
       )}
