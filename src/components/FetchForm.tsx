@@ -15,28 +15,7 @@ type Idea = {
 
 const FetchForm = () => {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState<Idea[]>([
-    {
-      title: "Idea 1",
-      description:
-        "Integration: Ensure that the sub-admin platform integrates smoothly with other parts of the ERP, such as the coach platform, player management, and central administration modules.",
-    },
-    {
-      title: "Idea 2",
-      description:
-        "Integration: Ensure that the sub-admin platform integrates smoothly with other parts of the ERP, such as the coach platform, player management, and central administration modules.",
-    },
-    {
-      title: "Idea 1",
-      description:
-        "Integration: Ensure that the sub-admin platform integrates smoothly with other parts of the ERP, such as the coach platform, player management, and central administration modules. 1",
-    },
-    {
-      title: "Idea 2",
-      description:
-        "Integration: Ensure that the sub-admin platform integrates smoothly with other parts of the ERP, such as the coach platform, player management, and central administration modules. 2",
-    },
-  ]);
+  const [ideas, setIdeas] = useState<Idea[]>([]);
 
   const [nicheBtnLoading, setNicheBtnLoading] = useState(false);
   const [ideasBtnLoading, setIdeasBtnLoading] = useState(false);
