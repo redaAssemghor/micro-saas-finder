@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClerkProvider from "@/providers/ClerkProvider";
+import StyledComponentsRegistry from "./lib/StyledComponentsRegistry";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body>
         <ClerkProvider>
           <Header />
-          <main>{children}</main>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
           <Footer />
         </ClerkProvider>
       </body>
