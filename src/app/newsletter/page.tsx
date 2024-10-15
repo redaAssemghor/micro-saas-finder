@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import { api } from "../../../convex/_generated/api";
-import { useMutation } from "convex/react";
 
 const Newsletter: React.FC = () => {
   const [email, setEmail] = useState("");
