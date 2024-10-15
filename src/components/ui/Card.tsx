@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import { FaInfoCircle } from "react-icons/fa";
 import styled from "styled-components";
 
