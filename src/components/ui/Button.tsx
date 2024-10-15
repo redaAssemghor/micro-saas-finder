@@ -5,13 +5,35 @@ interface ButtonProps {
   text: string;
   type: "button" | "submit" | "reset";
   onclick?: () => void;
+  loading?: boolean;
 }
 
-const Button = ({ text, type, onclick }: ButtonProps) => {
+const Button = ({ text, type, onclick, loading }: ButtonProps) => {
   return (
     <StyledWrapper>
-      <button onClick={onclick} type={type} className="button">
-        {text}
+      <button
+        onClick={onclick}
+        type={type}
+        className="button"
+        disabled={loading}
+      >
+        {loading ? (
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 100 101"
+              className="inline w-4 h-4 mr-2 animate-bounce"
+              role="status"
+              aria-hidden="true"
+            >
+              <circle fill="rgb(193, 163, 98)" r="45" cy="50" cx="50" />
+            </svg>
+            Loading...
+          </span>
+        ) : (
+          text
+        )}
       </button>
     </StyledWrapper>
   );

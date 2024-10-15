@@ -52,8 +52,7 @@ const StyledWrapper = styled.div`
     outline: none;
     box-shadow: inset 0px 0px 10px rgba(255, 102, 0, 0.5),
       inset 0px 0px 10px rgba(255, 212, 59, 0.5),
-      0px 0px 100px rgba(255, 212, 59, 0.5),
-      0px 0px 100px rgba(255, 102, 0, 0.5);
+      0px 0px 30px rgba(255, 212, 59, 0.5), 0px 0px 30px rgba(255, 102, 0, 0.5);
   }
 
   @media (max-width: 500px) {

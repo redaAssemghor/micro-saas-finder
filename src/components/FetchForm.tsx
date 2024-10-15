@@ -17,13 +17,14 @@ const FetchForm = () => {
   const [niche, setNiche] = useState("");
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
-  const [loading, setLoading] = useState(false);
+  const [nicheBtnLoading, setNicheBtnLoading] = useState(false);
+  const [ideasBtnLoading, setIdeasBtnLoading] = useState(false);
 
   const dispatch = useDispatch();
   const ideasSlice = useSelector((state: RootState) => state.ideas.value);
 
   const getRandomNiche = async () => {
-    setLoading(true);
+    setNicheBtnLoading(true);
 
     try {
       const response = await fetch("/api/get-random-niche", {
@@ -45,11 +46,12 @@ const FetchForm = () => {
     } catch (error) {
       console.error("Error fetching random niche:", error);
     } finally {
-      setLoading(false);
+      setNicheBtnLoading(false);
     }
   };
 
   const fetchIdeas = async (keyword: string) => {
+    setIdeasBtnLoading(true);
     try {
       const response = await fetch("/api/get-ideas", {
         method: "POST",
@@ -72,17 +74,15 @@ const FetchForm = () => {
     } catch (error) {
       console.error("Error fetching ideas:", error);
     } finally {
-      setLoading(false);
+      setIdeasBtnLoading(false);
     }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
 
     if (!niche) {
       alert("Please enter a niche.");
-      setLoading(false);
       return;
     }
 
@@ -90,11 +90,11 @@ const FetchForm = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-5">
+    <main className="flex flex-col items-center justify-center min-h-screen bg-[--dark-blue] p-5">
       <div className="flex flex-col items-center gap-6 pb-10">
-        <h1 className="text-center text-5xl font-bold text-[--yallow]">
+        <h1 className="text-center lg:text-5xl text-xl font-bold text-[--yallow]">
           Find Validated Micro Saas Ideas,
-          <span className="text-[--dark-blue]">Get Customers on Autopilot</span>
+          <span className="text-white">Get Customers on Autopilot</span>
         </h1>
         <p className="text-lg font-semibold text-gray-500">
           Choose an idea to see if people are already searching for a product
@@ -114,8 +114,17 @@ const FetchForm = () => {
           </h2>
           <Input setNiche={setNiche} niche={niche} />
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <Button onclick={getRandomNiche} text={'Random Niche'} type={'button'} />
-            <Button type={'submit'} text={'Generate FREE Ideas'} />
+            <Button
+              loading={nicheBtnLoading}
+              onclick={getRandomNiche}
+              text={"Random Niche"}
+              type={"button"}
+            />
+            <Button
+              loading={ideasBtnLoading}
+              type={"submit"}
+              text={"Generate FREE Ideas"}
+            />
           </div>
         </form>
       )}
