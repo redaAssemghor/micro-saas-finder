@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth, UserButton, SignInButton } from "@clerk/nextjs";
@@ -47,16 +46,28 @@ const Header = () => {
         </nav>
         <Checkbox toggleMenu={toggleMenu} />
       </div>
-      {isMenuOpen && <MobileMenu />}
+      {isMenuOpen && <MobileMenu userId={userId} />}
     </header>
   );
 };
 
-const MobileMenu = () => {
+type MobileMenuProps = {
+  userId: string | null | undefined;
+};
+
+const MobileMenu = ({ userId }: MobileMenuProps) => {
   return (
     <div className="absolute top-0 left-0">
       <div className="h-screen w-screen flex justify-center items-center flex-col gap-4 bg-[--dark] bg-opacity-20">
-        <UserButton />
+        {userId ? (
+          <UserButton />
+        ) : (
+          <SignInButton>
+            <button>
+              <Button text={"Sign In"} />
+            </button>
+          </SignInButton>
+        )}
         <Link href="/newsletter">
           <Button text={"News Letter"} />
         </Link>
@@ -71,7 +82,7 @@ type CheckboxProps = {
 
 const Checkbox = ({ toggleMenu }: CheckboxProps) => {
   return (
-    <label className="flex flex-col gap-2 w-8 z-50">
+    <label className="lg:hidden flex flex-col gap-2 w-8 z-50">
       <input className="peer hidden" type="checkbox" onChange={toggleMenu} />
       <div className="rounded-2xl h-[3px] w-1/2 bg-black duration-500 peer-checked:rotate-[225deg] origin-right peer-checked:-translate-x-[12px] peer-checked:-translate-y-[1px]" />
       <div className="rounded-2xl h-[3px] w-full bg-black duration-500 peer-checked:-rotate-45" />

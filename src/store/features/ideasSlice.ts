@@ -10,7 +10,24 @@ interface IdeasState {
 }
 
 const initialState: IdeasState = {
-  value: [],
+  value: [
+    {
+      title: "Idea 1",
+      description: "Description 1",
+    },
+    {
+      title: "Idea 2",
+      description: "Description 2",
+    },
+    {
+      title: "Idea 1",
+      description: "Description 1",
+    },
+    {
+      title: "Idea 2",
+      description: "Description 2",
+    },
+  ],
 };
 
 export const ideasSlice = createSlice({
