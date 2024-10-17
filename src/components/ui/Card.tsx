@@ -1,226 +1,40 @@
-"use client";
-import { FaInfoCircle } from "react-icons/fa";
-import styled from "styled-components";
+import React from "react";
 
-type CardProps = {
-  name: string;
-  description: string;
-};
-
-const Card = ({ name, description }: CardProps) => {
+const Card = ({ name, description }) => {
   return (
-    <StyledWrapper>
-      <div className="card">
-        <a className="card1" href="#">
-          <h1 className="font-semibold text-lg pb-2">{name}</h1>
-          <p className="small">{description}</p>
-          <a className="go-corner" href="#">
-            <FaInfoCircle color="white" />
-          </a>
-        </a>
+    <div className="group relative cursor-pointer overflow-hidden bg-white rounded-2xl px-6 pt-12 pb-10 shadow-2xl ring-1 ring-gray-900/5 transition-all duration-500 transform hover:scale-105 hover:shadow-3xl sm:mx-auto sm:max-w-sm sm:px-12">
+      <span className="absolute top-0 left-0 z-0 h-32 w-32 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-75 transition-all duration-500 transform group-hover:scale-[20]" />
+      <div className="relative z-10 mx-auto max-w-md">
+        <span className="grid h-24 w-24 place-items-center rounded-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-500 transform group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-yellow-500">
+          <svg
+            className="h-12 w-12 text-white transition-all"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          </svg>
+        </span>
+        <div className="space-y-6 pt-6 text-lg text-gray-700 transition-all duration-500 group-hover:text-white">
+          <h1 className="font-bold text-xl">{name}</h1>
+          <p className="font-medium">{description}</p>
+        </div>
+        <div className="pt-6 text-lg font-semibold leading-7">
+          <p>
+            <span className="text-purple-500 transition-all duration-500 group-hover:text-white">
+              Explore SEO potential
+            </span>
+          </p>
+        </div>
       </div>
-    </StyledWrapper>
+    </div>
   );
 };
-
-const StyledWrapper = styled.div`
-  .card p {
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #666;
-  }
-
-  .card p.small {
-    font-size: 16px;
-  }
-
-  .go-corner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    overflow: hidden;
-    top: 0;
-    right: 0;
-    background-color: #ff6f3c;
-    border-radius: 0 4px 0 32px;
-  }
-
-  .go-arrow {
-    margin-top: -4px;
-    margin-right: -4px;
-    color: white;
-    font-family: courier, sans;
-  }
-
-  .card1 {
-    display: block;
-    position: relative;
-    max-width: 300px;
-    background-color: #f2f8f9;
-    border-radius: 10px;
-    padding: 32px 24px;
-    margin: 12px;
-    text-decoration: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .card1:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: -16px;
-    right: -16px;
-    background: #ff6f3c;
-    height: 32px;
-    width: 32px;
-    border-radius: 32px;
-    transform: scale(1);
-    transform-origin: 50% 50%;
-    transition: transform 0.25s ease-out;
-  }
-
-  .card1:hover:before {
-    transform: scale(21);
-  }
-
-  .card1:hover p {
-    transition: all 0.3s ease-out;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .card1:hover h3 {
-    transition: all 0.3s ease-out;
-    color: #fff;
-  }
-
-  .card2 {
-    display: block;
-    top: 0px;
-    position: relative;
-    max-width: 262px;
-    background-color: #f2f8f9;
-    border-radius: 4px;
-    padding: 32px 24px;
-    margin: 12px;
-    text-decoration: none;
-    z-index: 0;
-    overflow: hidden;
-    border: 1px solid #f2f8f9;
-  }
-
-  .card2:hover {
-    transition: all 0.2s ease-out;
-    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
-    top: -4px;
-    border: 1px solid #ccc;
-    background-color: white;
-  }
-
-  .card2:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: -16px;
-    right: -16px;
-    background: #00838d;
-    height: 32px;
-    width: 32px;
-    border-radius: 32px;
-    transform: scale(2);
-    transform-origin: 50% 50%;
-    transition: transform 0.15s ease-out;
-  }
-
-  .card2:hover:before {
-    transform: scale(2.15);
-  }
-
-  .card3 {
-    display: block;
-    top: 0px;
-    position: relative;
-    max-width: 262px;
-    background-color: #f2f8f9;
-    border-radius: 4px;
-    padding: 32px 24px;
-    margin: 12px;
-    text-decoration: none;
-    overflow: hidden;
-    border: 1px solid #f2f8f9;
-  }
-
-  .card3 .go-corner {
-    opacity: 0.7;
-  }
-
-  .card3:hover {
-    border: 1px solid #00838d;
-    box-shadow: 0px 0px 999px 999px rgba(255, 255, 255, 0.5);
-    z-index: 500;
-  }
-
-  .card3:hover p {
-    color: #00838d;
-  }
-
-  .card3:hover .go-corner {
-    transition: opactiy 0.3s linear;
-    opacity: 1;
-  }
-
-  .card4 {
-    display: block;
-    top: 0px;
-    position: relative;
-    max-width: 262px;
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 32px 24px;
-    margin: 12px;
-    text-decoration: none;
-    overflow: hidden;
-    border: 1px solid #ccc;
-  }
-
-  .card4 .go-corner {
-    background-color: #00838d;
-    height: 100%;
-    width: 16px;
-    padding-right: 9px;
-    border-radius: 0;
-    transform: skew(6deg);
-    margin-right: -36px;
-    align-items: start;
-    background-image: linear-gradient(-45deg, #8f479a 1%, #dc2a74 100%);
-  }
-
-  .card4 .go-arrow {
-    transform: skew(-6deg);
-    margin-left: -2px;
-    margin-top: 9px;
-    opacity: 0;
-  }
-
-  .card4:hover {
-    border: 1px solid #cd3d73;
-  }
-
-  .card4 h3 {
-    margin-top: 8px;
-  }
-
-  .card4:hover .go-corner {
-    margin-right: -12px;
-  }
-
-  .card4:hover .go-arrow {
-    opacity: 1;
-  }
-`;
 
 export default Card;

@@ -7,6 +7,7 @@ import Results from "./Results";
 import { setNicheSlice } from "@/store/features/nicheSlice";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
+import Loader from "./ui/Loading";
 
 type Idea = {
   title: string;
@@ -90,8 +91,8 @@ const FetchForm = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-[--dark-blue] p-5">
-      <div className="flex flex-col items-center gap-6 pb-10">
+    <main className="flex flex-col items-center min-h-screen bg-[--dark-blue] p-5">
+      <div className="flex flex-col items-center gap-6 py-14">
         <h1 className="text-center lg:text-5xl text-xl font-bold text-[--yallow]">
           Find Validated Micro Saas Ideas,
           <span className="text-white">Get Customers on Autopilot</span>
@@ -102,32 +103,40 @@ const FetchForm = () => {
           10 on Google
         </p>
       </div>
-      {ideas && ideas.length > 0 ? (
-        <Results ideas={ideas} />
-      ) : (
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-2xl bg-[--dark] text-white shadow-lg rounded-lg lg:p-12 p-3"
-        >
-          <h2 className="text-xl font-bold mb-4">
-            Step 1: Enter a niche or click random
-          </h2>
-          <Input setNiche={setNiche} niche={niche} />
-          <div className="flex flex-col md:flex-row justify-between gap-4">
-            <Button
-              loading={nicheBtnLoading}
-              onclick={getRandomNiche}
-              text={"Random Niche"}
-              type={"button"}
-            />
-            <Button
-              loading={ideasBtnLoading}
-              type={"submit"}
-              text={"Generate FREE Ideas"}
-            />
+      <div>
+        {ideas && ideas.length > 0 ? (
+          <Results ideas={ideas} />
+        ) : (
+          <div>
+            {ideasBtnLoading ? (
+              <Loader />
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="w-full max-w-2xl bg-[--dark] text-white shadow-lg rounded-lg lg:p-12 p-3"
+              >
+                <h2 className="text-xl font-bold mb-4">
+                  Step 1: Enter a niche or click random
+                </h2>
+                <Input setNiche={setNiche} niche={niche} />
+                <div className="flex flex-col md:flex-row justify-between gap-4">
+                  <Button
+                    loading={nicheBtnLoading}
+                    onclick={getRandomNiche}
+                    text={"Random Niche"}
+                    type={"button"}
+                  />
+                  <Button
+                    loading={ideasBtnLoading}
+                    type={"submit"}
+                    text={"Generate FREE Ideas"}
+                  />
+                </div>
+              </form>
+            )}
           </div>
-        </form>
-      )}
+        )}
+      </div>
     </main>
   );
 };

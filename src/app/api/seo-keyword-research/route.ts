@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const keyword = searchParams.get("keyword") || "email marketing";
-  const country = searchParams.get("country") || "in";
+  const country = searchParams.get("country") || "us";
 
   const apiKey = process.env.RAPIDAPI_KEY;
 
