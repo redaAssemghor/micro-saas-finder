@@ -384,7 +384,7 @@ const FetchSeo = () => {
     shortage: 3,
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const idea = useSelector((state: RootState) => state.singleIdea.value);
@@ -421,10 +421,8 @@ const FetchSeo = () => {
   return (
     <div
       id="seo"
-      className="text-white h-screen flex flex-col justify-center items-center"
+      className="text-white min-h-screen flex flex-col justify-center items-center"
     >
-      <h2>Keyword Research</h2>
-
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {loading ? (
@@ -440,7 +438,11 @@ const FetchSeo = () => {
   );
 };
 
-const SeoAnalysis = ({ data }) => {
+type SeoAnalysisProps = {
+  data: object;
+};
+
+const SeoAnalysis = ({ data }: SeoAnalysisProps) => {
   if (!data) {
     return <p>No data available.</p>;
   }

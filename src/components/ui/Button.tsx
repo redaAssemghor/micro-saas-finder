@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 interface ButtonProps {
   text: string;
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   onclick?: () => void;
   loading?: boolean;
 }

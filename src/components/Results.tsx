@@ -4,6 +4,7 @@ import { addIdea } from "@/store/features/singleIdeaSlice";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import FetchSeo from "./FetchSeo";
+import Button from "./ui/Button";
 
 type Idea = {
   title: string;
@@ -30,14 +31,10 @@ const Results = ({ ideas, setIdeas }: ResultsProps) => {
     <div className="flex flex-col items-center gap-12 lg:m-10 w-full justify-center">
       <div className="flex flex-col items-center gap-12">
         <h1 className="text-center p-6 bg-gradient-to-r from-pink-500 to-yellow-500 text-lg text-white rounded-md">
-          ideas for the niche: <span className="font-bold">{nicheSlice}</span>{" "}
+          Step 1 : ideas for the niche:{" "}
+          <span className="font-bold">{nicheSlice}</span>{" "}
         </h1>
-        <button
-          className="bg-gradient-to-r from-purple-500 to-blue-500 text-white font-bold rounded-3xl shadow-2xl shadow-black p-7"
-          onClick={() => setIdeas([])}
-        >
-          Restart
-        </button>
+        <Button text="Restart" onclick={() => setIdeas([])} />
         {ideas.length > 0 && (
           <div className="flex flex-col lg:grid grid-cols-3 gap-10">
             {ideas.map((idea, i) => (
