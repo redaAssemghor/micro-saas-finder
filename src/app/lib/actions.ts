@@ -16,13 +16,14 @@ export async function getGroqChatCompletion(prompt: string) {
 
 // fetch ideas action
 export async function getSaasIdeas(keyword: string) {
-  const prompt = `Generate five innovative SaaS startup ideas related to "${keyword}". Provide a brief description for each idea. Format your response exactly as:
+  const prompt = `Generate six innovative SaaS startup ideas related to "${keyword}". Provide a comprehensive title that resume the idea and a brief description for each idea. Format your response exactly as:
 
-1. Title: Brief Description
-2. Title: Brief Description
-3. Title: Brief Description
-4. Title: Brief Description
-5. Title: Brief Description
+1. what is it about: Brief Description
+2. what is it about: Brief Description
+3. what is it about: Brief Description
+4. what is it about: Brief Description
+5. what is it about: Brief Description
+6. what is it about: Brief Description
 
 Do not include any additional text or characters.`;
 

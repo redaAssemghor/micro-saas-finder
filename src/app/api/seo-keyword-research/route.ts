@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const apiUrl = `https://seo-keyword-research.p.rapidapi.com/keynew.php?keyword=${encodeURIComponent(
+  const apiUrl = `https://ahrefs1.p.rapidapi.com/v1/keyword-difficulty-checker?keyword=${encodeURIComponent(
     keyword
   )}&country=${encodeURIComponent(country)}`;
 
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       method: "GET",
       headers: {
         "X-RapidAPI-Key": apiKey,
-        "X-RapidAPI-Host": "seo-keyword-research.p.rapidapi.com",
+        "X-RapidAPI-Host": "ahrefs1.p.rapidapi.com",
       },
     });
 

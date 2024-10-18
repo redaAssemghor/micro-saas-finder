@@ -1,6 +1,12 @@
-import React from "react";
+import Link from "next/link";
 
-const Card = ({ name, description }) => {
+interface CardProps {
+  name: string;
+  description: string;
+  handleClick: () => void;
+}
+
+const Card = ({ name, description, handleClick }: CardProps) => {
   return (
     <div className="group relative cursor-pointer overflow-hidden bg-white rounded-2xl px-6 pt-12 pb-10 shadow-2xl ring-1 ring-gray-900/5 transition-all duration-500 transform hover:scale-105 hover:shadow-3xl sm:mx-auto sm:max-w-sm sm:px-12">
       <span className="absolute top-0 left-0 z-0 h-32 w-32 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-75 transition-all duration-500 transform group-hover:scale-[20]" />
@@ -21,16 +27,19 @@ const Card = ({ name, description }) => {
             />
           </svg>
         </span>
-        <div className="space-y-6 pt-6 text-lg text-gray-700 transition-all duration-500 group-hover:text-white">
+        <div className="space-y-6 pt-6 text-base text-gray-700 transition-all duration-500 group-hover:text-white">
           <h1 className="font-bold text-xl">{name}</h1>
           <p className="font-medium">{description}</p>
         </div>
         <div className="pt-6 text-lg font-semibold leading-7">
-          <p>
-            <span className="text-purple-500 transition-all duration-500 group-hover:text-white">
-              Explore SEO potential
-            </span>
-          </p>
+          <button onClick={handleClick}>
+            <Link href="#seo">
+              <span className="text-purple-500 transition-all duration-500 group-hover:text-white ">
+                Explore SEO potential{" "}
+                <span className="font-black text-4xl align-sub">&rarr;</span>
+              </span>
+            </Link>
+          </button>
         </div>
       </div>
     </div>

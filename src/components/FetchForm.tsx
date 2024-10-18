@@ -16,13 +16,45 @@ type Idea = {
 
 const FetchForm = () => {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState<Idea[]>([]);
+  const [ideas, setIdeas] = useState<Idea[]>([
+    {
+      title: "AppShield Pro",
+      description:
+        "This SaaS startup provides a comprehensive mobile app security platform that enables developers to scan, analyze, and remediate vulnerabilities in real-time, offering real-time threat detection, custom threat modeling, and automated pen-testing tools.",
+    },
+    {
+      title: "Cybesecur",
+      description:
+        "Focusing on the growing concern of API security, Cybesecur offers a comprehensive API protection solution, helping enterprises protect their APIs from fraud, hacking, and data breaches by providing real-time API threat detection, rate limiting, and real-time analytics.",
+    },
+    {
+      title: "SecureZone",
+      description:
+        "SecureZone is a secure storage and sharing platform that allows mobile app developers to securely store and share sensitive data and credentials, providing an additional layer of security and compliance for app development and deployment.",
+    },
+    {
+      title: "Mobiledetect",
+      description:
+        "Leveraging AI-powered threat detection, Mobiledetect identifies and blocks mobile malware and malicious files, offering a cloud-based antivirus and anti-malware solution that enhances app security and protects user data.",
+    },
+    {
+      title: "AppGuard",
+      description:
+        "AppGuard is a cutting-edge mobile app security solution that combines machine learning-based threat detection with dynamic analysis and behavioral analysis to identify and prevent app-based attacks, offering a comprehensive endpoint security solution for mobile devices.",
+    },
+    {
+      title: "SafeCode",
+      description:
+        "SafeCode provides a unique code analysis solution that detects and prevents common coding errors and vulnerabilities in mobile app code, identifying and fixing issues before they become security risk, using AI-powered code review and analysis.",
+    },
+  ]);
 
   const [nicheBtnLoading, setNicheBtnLoading] = useState(false);
   const [ideasBtnLoading, setIdeasBtnLoading] = useState(false);
 
   const dispatch = useDispatch();
   const ideasSlice = useSelector((state: RootState) => state.ideas.value);
+  const singleIdea = useSelector((state: RootState) => state.singleIdea.value);
 
   const getRandomNiche = async () => {
     setNicheBtnLoading(true);
@@ -34,7 +66,8 @@ const FetchForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt: "give me a random niche in one word max",
+          prompt:
+            "Provide a tech-related niche in three words or fewer. Only output the idea itself, with no additional text or special characters.",
         }),
       });
 
@@ -105,7 +138,7 @@ const FetchForm = () => {
       </div>
       <div>
         {ideas && ideas.length > 0 ? (
-          <Results ideas={ideas} />
+          <Results ideas={ideas} setIdeas={setIdeas} />
         ) : (
           <div>
             {ideasBtnLoading ? (
@@ -113,13 +146,13 @@ const FetchForm = () => {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="w-full max-w-2xl bg-[--dark] text-white shadow-lg rounded-lg lg:p-12 p-3"
+                className="lg:w-[700px] max-w-2xl bg-[--dark] text-white shadow-lg rounded-lg lg:p-12 p-3"
               >
                 <h2 className="text-xl font-bold mb-4">
                   Step 1: Enter a niche or click random
                 </h2>
                 <Input setNiche={setNiche} niche={niche} />
-                <div className="flex flex-col md:flex-row justify-between gap-4">
+                <div className="flex flex-col md:flex-row w-full justify-between gap-4">
                   <Button
                     loading={nicheBtnLoading}
                     onclick={getRandomNiche}

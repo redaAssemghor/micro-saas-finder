@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { ideasSlice } from "./features/ideasSlice";
 import { nicheSlice } from "./features/nicheSlice";
+import { singleIdeaSlice } from "./features/singleIdeaSlice";
 
 export const store = configureStore({
   reducer: {
     ideas: ideasSlice.reducer,
     niche: nicheSlice.reducer,
+    singleIdea: singleIdeaSlice.reducer,
   },
 });
 
