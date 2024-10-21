@@ -447,7 +447,7 @@ const SeoAnalysis = ({ data }: SeoAnalysisProps) => {
     return <p>No data available.</p>;
   }
 
-  const { difficulty, shortage, serp } = data;
+  const { difficulty, shortage, serp }: any = data;
   const results = serp?.results || [];
 
   return (
@@ -466,7 +466,7 @@ const SeoAnalysis = ({ data }: SeoAnalysisProps) => {
 
       <div>
         <h3>Search Engine Results</h3>
-        {results.map((result, index) => {
+        {results.map((result: any, index: any) => {
           const pos = result.pos;
           const content = result.content;
 
