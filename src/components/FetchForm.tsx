@@ -16,38 +16,7 @@ type Idea = {
 
 const FetchForm = () => {
   const [niche, setNiche] = useState("");
-  const [ideas, setIdeas] = useState<Idea[]>([
-    {
-      title: "AppShield Pro",
-      description:
-        "This SaaS startup provides a comprehensive mobile app security platform that enables developers to scan, analyze, and remediate vulnerabilities in real-time, offering real-time threat detection, custom threat modeling, and automated pen-testing tools.",
-    },
-    {
-      title: "Cybesecur",
-      description:
-        "Focusing on the growing concern of API security, Cybesecur offers a comprehensive API protection solution, helping enterprises protect their APIs from fraud, hacking, and data breaches by providing real-time API threat detection, rate limiting, and real-time analytics.",
-    },
-    {
-      title: "SecureZone",
-      description:
-        "SecureZone is a secure storage and sharing platform that allows mobile app developers to securely store and share sensitive data and credentials, providing an additional layer of security and compliance for app development and deployment.",
-    },
-    {
-      title: "Mobiledetect",
-      description:
-        "Leveraging AI-powered threat detection, Mobiledetect identifies and blocks mobile malware and malicious files, offering a cloud-based antivirus and anti-malware solution that enhances app security and protects user data.",
-    },
-    {
-      title: "AppGuard",
-      description:
-        "AppGuard is a cutting-edge mobile app security solution that combines machine learning-based threat detection with dynamic analysis and behavioral analysis to identify and prevent app-based attacks, offering a comprehensive endpoint security solution for mobile devices.",
-    },
-    {
-      title: "SafeCode",
-      description:
-        "SafeCode provides a unique code analysis solution that detects and prevents common coding errors and vulnerabilities in mobile app code, identifying and fixing issues before they become security risk, using AI-powered code review and analysis.",
-    },
-  ]);
+  const [ideas, setIdeas] = useState<Idea[]>([]);
 
   const [nicheBtnLoading, setNicheBtnLoading] = useState(false);
   const [ideasBtnLoading, setIdeasBtnLoading] = useState(false);
