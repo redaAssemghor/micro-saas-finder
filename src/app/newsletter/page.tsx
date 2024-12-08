@@ -11,7 +11,7 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center h-screen">
       <div className="w-1/2 flex flex-col items-center justify-center bg-gray-100 p-6 sm:p-12">
         <h1 className="lg:text-4xl text-slate-700 font-black text-center mb-4">
           Get Micro SaaS Ideas that your customers are already looking for
