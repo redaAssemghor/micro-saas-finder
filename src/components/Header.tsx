@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[--dark-blue] shadow-md p-3">
+    <header className="sticky top-0 z-50 bg-[--dark-blue] shadow-md lg:px-40 p-3">
       <div className="flex justify-between items-center">
         <a href="/" className="flex items-center gap-4">
           <Image

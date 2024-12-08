@@ -52,7 +52,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-start sm:items-center sm:space-x-8 bg-gray-100 p-6 sm:p-12">
+    <div className="flex flex-col sm:flex-row justify-center items-start sm:items-center sm:space-x-8 bg-gray-100 p-6 sm:p-12 lg:px-40">
       <div className="w-full sm:w-1/3 mb-6 sm:mb-0">
         <h1 className="text-sm text-blue-500 font-bold mb-4">FAQ</h1>
         <h2 className="text-2xl font-semibold">Frequently Asked Questions</h2>

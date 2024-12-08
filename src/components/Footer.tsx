@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-stone-200 p-10 text-gray-700">
+    <footer className="bg-stone-200 p-8 lg:p-0 lg:py-8 text-gray-700 lg:px-40">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-start">
         <div className="max-w-[500px] mb-8 md:mb-0">
           <Link href="/" passHref>
