@@ -1,32 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import "../styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClerkProvider from "@/providers/ClerkProvider";
 import StyledComponentsRegistry from "./lib/StyledComponentsRegistry";
-
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
-
-export const metadata: Metadata = {
-  title: "Free Ideas generator | find your big saas",
-  description: "Generate saas ideas",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" className={roboto.className}>
-      <body>
-        <ClerkProvider>
-          <Header />
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-          <Footer />
-        </ClerkProvider>
-      </body>
-    </html>
-  );
+export const metadata: Metadata = { title: "MicroSaaS — Find your next thing", description: "Turn a niche into a practical startup plan. Explore ideas, plan your MVP, map your SEO strategy, and save your next move." };
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en"><body><ClerkProvider><a className="skip-link" href="#main-content">Skip to content</a><Header /><StyledComponentsRegistry>{children}</StyledComponentsRegistry><Footer /></ClerkProvider></body></html>;
 }
