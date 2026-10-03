@@ -12,7 +12,7 @@ export async function generatePlan(settings: Settings): Promise<Plan> {
   };
   const response = await fetch((process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434").replace(/\/$/, "") + "/api/chat", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    signal: AbortSignal.timeout(180000), cache: "no-store",
+    signal: AbortSignal.timeout(60000), cache: "no-store",
     body: JSON.stringify({
       model, stream: false, think: false, format: "json", options: { temperature: 0.7, num_predict: 5500 },
       messages: [

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { parseSettings } from "@/lib/plans";
 import { generatePlan } from "@/lib/ai";
 export const runtime = "nodejs";
-export const maxDuration = 180;
+export const maxDuration = 60;
 export async function POST(request: NextRequest) {
   if (Number(request.headers.get("content-length")) > 12000) return NextResponse.json({ error: "Brief is too large." }, { status: 413 });
   let input: unknown;
